@@ -1,0 +1,40 @@
+<h1>show amazon</h1>
+<p id="notice"><%= notice %></p>
+
+<p>
+	<strong>name</strong>
+	<%= @amazon.name %>
+</p>
+
+<p>
+	<strong>Email</strong>
+	<%= @amazon.email%>
+</p>
+
+<p>
+	<strong>Mobile_No</strong>
+	<%= @amazon.mobile_no %>
+</p>
+
+<p>
+	<strong>Image</strong>
+	<%= @amazon.image %>
+</p>
+
+<p>
+	<strong>date</strong>
+	<%= @amazon.date %>
+</p>
+
+<p>
+	<strong>Address</strong>
+	<%= @amazon.address %>
+</p>
+
+<p>
+	<strong>Active</strong>
+	<%= @amazon.status %>
+</p>
+
+<%= link_to 'edit', edit_amazon_path(@amazon) %>
+<%= link_to 'beck', amazons_path %>

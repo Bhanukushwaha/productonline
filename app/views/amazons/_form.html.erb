@@ -1,0 +1,51 @@
+<%= form_with(model: @amazon) do |f| %>
+<% if @amazon.errors.any? %>
+      <div class="errorExplanation">
+        <h2>Errors encountered with your amazon information:</h2>
+        <ul>
+          <% @amazon.errors.full_messages.each do |m| %>
+            <li><%= m %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %> 
+  
+  <div class="field">
+  	<%= f.label :name %>
+  	<%= f.text_field :name, placeholder: 'Enter your name' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.email_field :email, placeholder: 'Enter your email' %>    
+  </div>
+
+  <div class="field">
+    <%= f.label :mobile_no %>
+    <%= f.number_field :mobile_no, placeholder: 'Enter your Number' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :date %>
+    <%= f.date_field :date %>
+  </div>
+
+  <div class="field">
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+  </div>
+
+  <div class="field">
+    <%= f.label :address %>
+    <%= f.text_area :address, placeholder: 'Enter your address' %>
+  </div>
+
+  <div>
+    <%= f.label :active %>
+    <%= f.check_box :status %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
