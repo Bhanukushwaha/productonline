@@ -7,5 +7,13 @@ Rails.application.routes.draw do
   resources :amazons, :only => [:index,:new,:destroy,:create,:show]
 
   resources :students
-  resources :products   
+  resources :products, :only => [:index,:show] do
+  	resources :favorites do
+      collection do
+        get :add_favorite
+        get :remove_favorite
+      end
+    end
+  end 
+  get "/favorites", to: "favorites#index"
 end

@@ -1,0 +1,23 @@
+<h1>product</h1>
+<p>
+	<strong>name</strong>
+	<%= @product.name %>
+</p>
+
+<p>
+	<strong>description</strong>
+	<%= @product.description %>
+</p>
+
+<p>
+	<strong>price</strong>
+	<%= @product.price %>
+</p>
+<p>
+<% unless Favorite.find_by(user_id: current_user.id, product_id: @product.id).present? %>
+  <%= link_to 'Add to favorites', add_favorite_product_favorites_path(@product.id) %>
+<% else %>
+  <%= link_to 'Remove from favorites', remove_favorite_product_favorites_path(@product.id) %>
+<% end %>
+</p>
+<%= link_to 'Back', products_path %>

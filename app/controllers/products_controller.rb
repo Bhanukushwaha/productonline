@@ -6,4 +6,10 @@ class ProductsController < ApplicationController
 			@products = Product.all.paginate(page: params[:page], per_page: 3)
 		end
 	end
+
+	def show
+		@product = Product.find(params[:id])
+	end
+
+	
 end
