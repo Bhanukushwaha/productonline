@@ -5,25 +5,70 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   </head>
-
-  <body class="container">
-    <p class="navbar-text float-right">
-      <a href="/products">products</a>
-      <% if user_signed_in? %>
-        <a href="/favorites">Favorites</a>
-        <strong><%= current_user.email %></strong>.
-        <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-        <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-      <% else %>
-        <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-        <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-      <% end %>
-    </p>
-
+  <body>    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Commers</a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">            
+            <a href="/products" class="nav-link">products</a>
+          </li>
+          <% if user_signed_in? %>
+          <li class="nav-item">                 
+            <a href="/favorites" class="nav-link">Favorites</a>
+          </li>
+          <li class="nav-item">                     
+            <a href="/carts" class="nav-link">Cart(<%= current_cart.cart_items.count rescue nil%>)</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+             <a class="dropdown-item" href="#">Action</a>
+             <a class="dropdown-item" href="#">Another action</a>
+             <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+          <% end %>
+        </ul>                
+        <form class="form-inline my-2 my-lg-0">
+          <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/manage"><span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">settings</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <% if user_signed_in? %>
+            <a class="dropdown-item">
+              <strong><%= current_user.email %></strong>               
+            </a>            
+            <a>              
+              <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'dropdown-item'  %>
+            </a>
+            <a>              
+              <%= link_to 'Edit profile', edit_user_registration_path, :class => 'dropdown-item' %>
+            </a>
+             <% else %>
+            <a>
+             <%= link_to "Sign up", new_user_registration_path, :class => 'dropdown-item'  %>             
+            </a>
+            <a>
+              <%= link_to "Login", new_user_session_path, :class => 'dropdown-item'  %>
+            </a>
+            <% end %> 
+          </div>
+        </li>
+      </ul> 
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
     <%= yield %>
   </body>
 </html>

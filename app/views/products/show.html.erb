@@ -1,5 +1,12 @@
 <h1>product</h1>
 <p>
+	<% if @product.pictures.any? %>
+		<% @product.pictures.each do |pic| %>
+			<%= image_tag url_for(pic), hight:150,width:150 %>
+		<% end %>
+	<% end %>
+</p>
+<p>
 	<strong>name</strong>
 	<%= @product.name %>
 </p>
@@ -20,4 +27,16 @@
   <%= link_to 'Remove from favorites', remove_favorite_product_favorites_path(@product.id) %>
 <% end %>
 </p>
+<p>
+	<% if user_signed_in? %>
+    <% if current_cart.cart_items.where(product_id: @product.id).first.present? %>
+	    <%= link_to "Go to Cart", carts_path %>
+	  <% else %>
+	    <%= link_to 'Add to cart', product_add_cart_path(@product.id) %>
+	  <% end %>
+  <% end %>
+</p>
 <%= link_to 'Back', products_path %>
+
+<%#= image_tag url_for(Product.last.pictures.first)%>
+

@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   resources :students
   resources :products, :only => [:index,:show] do
+    get :add_cart
+    get :remove_cart 
   	resources :favorites do
       collection do
         get :add_favorite
@@ -16,4 +18,6 @@ Rails.application.routes.draw do
     end
   end 
   get "/favorites", to: "favorites#index"
+  resources :carts
+  get "/update_cart_item_quantity/:type/:cart_item_id" => "carts#update_cart_item_quantity", as: :update_cart_item_quantity
 end

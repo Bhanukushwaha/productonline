@@ -9,7 +9,7 @@
                   
     </tr>
 		<tr  class="header">
-			<th>No</th>
+			<th>ID</th>
 			<th>name</th>
 			<th>description</th>
 			<th>price</th>
@@ -17,9 +17,9 @@
 		</tr>
 	</thead>
 	<tbody>
-		<% @products.each_with_index do |product, sindex| %>
+		<% @products.each do |product| %>
 			<tr>
-		  	  <td><%= sindex+1 %></td>
+		  	  <td><%= product.id %></td>
 					<td><%= product.name %></td>
 					<td><%= product.description %></td>
 					<td><%= product.price %></td>

@@ -1,0 +1,79 @@
+<h2>Cart Items</h2>
+<table id="myTable">
+	<thead>
+			<tr  class="header">
+			<th>Name</th>
+			<th>Description</th>
+			<th>Image</th>
+			<th>Quantity</th>
+			<th>price</th>
+			<th>Unit price</th>
+			<th colspan="3">Action</th>
+		</tr>
+	</thead>
+	<tbody>	
+		<% @cart_items.each do |cart_item| %>
+			<tr>
+				<td><%= cart_item.product.name %></td>
+				<td><%= cart_item.product.description %></td>
+				<td><% if cart_item&.product&.pictures.any? %>
+					<%= image_tag url_for(cart_item&.product&.pictures.last), hight:150,width:150 %>
+					<% end %>
+				</td>
+					<!-- <td><%#= cart_item.quantity %></td> -->
+				<td>
+					<div class="btn-group mr-2" role="group" aria-label="First 
+				    group"><% unless cart_item.quantity.to_i == 1 %>
+	          <div><%= link_to "-", update_cart_item_quantity_path(type: "decrease", cart_item_id: cart_item.id), class: "btn btn-danger", remote: true %>
+	          </div>
+	          <% end %>
+	          <div>
+	            <%= text_field_tag :quantity, cart_item.quantity, style: " height:35px;width:80px;", class: "text-center", min: 1 %>
+	          </div>
+	          <div><%= link_to "+", update_cart_item_quantity_path(type: "increase", cart_item_id: cart_item.id), class: "btn btn-success", remote: true %>	          	
+	          </div>
+          </div>        
+					</td>
+					<td><%= cart_item.price %></td>
+					<td><%= cart_item.unit_price %></td>
+					<td><%= link_to "Remove",  product_remove_cart_path(cart_item.product.id)  %></td>
+			</tr>
+		<% end %>		
+	</tbody>
+</table>
+<style>
+* {
+  box-sizing: border-box;
+}
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 70%;
+  border-radius: 10px;
+  font-size: 16px;
+  padding: 12px 20px 8px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 14px;
+}
+#myTable {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+  font-size: 18px;
+}
+
+#myTable th, #myTable td {
+  text-align: left;
+  padding: 7px;
+}
+
+#myTable tr {
+  border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header, #myTable tr:hover {
+  background-color: #f1f1f1;
+}
+</style>
+
