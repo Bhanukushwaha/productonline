@@ -1,0 +1,65 @@
+<%= link_to 'New address' , new_address_path, class: "btn btn-outline-primary" %>
+
+<table id="myTable">
+	<thead>
+		<tr class="header">
+			<th>Country</th>
+			<th>District</th>
+			<th>Post code</th>
+			<th>Address</th>
+			<td colspan="3">Action</td>
+		</tr>
+	</thead>
+	<tbody>
+		<% @addresses.each do | address | %>
+		<tr>
+			<td><%= address.country %></td>
+			<td><%= address.district %></td>
+			<td><%= address.post_code %></td>
+			<td><%= address.address %></td>
+			<td><%= link_to 'show', address, class: "btn btn-outline-warning" %></td>
+			<td><%= link_to 'Edit', edit_address_path(address), class: "btn btn-outline-success" %></td>
+			<td><%= button_to 'Destroy', address, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-outline-danger" %></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 70%;
+  border-radius: 10px;
+  font-size: 16px;
+  padding: 12px 20px 8px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 14px;
+}
+
+#myTable {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+  font-size: 18px;
+}
+
+#myTable th, #myTable td {
+  text-align: left;
+  padding: 7px;
+}
+
+#myTable tr {
+  border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header, #myTable tr:hover {
+  background-color: #f1f1f1;
+}
+</style>
+

@@ -1,0 +1,39 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  cart_id: 1
+  product_id: 1
+  price: 9.99
+  decimal: MyString
+  quantity: 1
+  first_name: MyString
+  last_name: MyString
+  email: 1
+  phone: 1
+  country: MyString
+  address: MyString
+  town: MyString
+  district: MyString
+  postal_code: 
+  description: MyText
+  address_id: 1
+
+two:
+  user_id: 1
+  cart_id: 1
+  product_id: 1
+  price: 9.99
+  decimal: MyString
+  quantity: 1
+  first_name: MyString
+  last_name: MyString
+  email: 1
+  phone: 1
+  country: MyString
+  address: MyString
+  town: MyString
+  district: MyString
+  postal_code: 
+  description: MyText
+  address_id: 1

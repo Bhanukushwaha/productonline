@@ -1,3 +1,4 @@
+<div class="container">
 <h1>product</h1>
 <p>
 	<% if @product.pictures.any? %>
@@ -7,17 +8,17 @@
 	<% end %>
 </p>
 <p>
-	<strong>name</strong>
+	<strong>Name :</strong>
 	<%= @product.name %>
 </p>
 
 <p>
-	<strong>description</strong>
+	<strong>Description :</strong>
 	<%= @product.description %>
 </p>
 
 <p>
-	<strong>price</strong>
+	<strong>Price :</strong>
 	<%= @product.price %>
 </p>
 <p>
@@ -36,7 +37,7 @@
 	  <% end %>
   <% end %>
 </p>
-<%= link_to 'Back', products_path %>
-
+<%= link_to 'Back', products_path, class: "btn btn-outline-info" %>
+</div>
 <%#= image_tag url_for(Product.last.pictures.first)%>
 

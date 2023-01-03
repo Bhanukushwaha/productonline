@@ -1,0 +1,16 @@
+ONESIGNAL_KEY='test'
+STRIPE_PK='pk_test_51DqkOeFhogBC8embyfSEY6VmJdFRAf4ThDidXs5at1L8IH6Fqze60JL7cJ4iiKaSj2fdln91EUmnAE4IVkogRs8P006JpAzd9w'
+LOCAL_URL="http://localhost:3000/"
+BASE_URL="http://localhost:3000/"
+API_HOST='localhost'
+STRIPE_ACCOUNT='test'
+GOOGLE_KEY='test'
+GOOGLE_CLIENT_IOS='test'
+GOOGLE_CLIENT_ID='test'
+GOOGLE_CLIENT_WEB='test'
+
+http://localhost:8081/debugger-ui/
+npx react-native start --reset-cache
+
+<script src="http://localhost:8097"></script>
+<script src="http://192.168.1.64:8097"></script>

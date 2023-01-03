@@ -2,10 +2,10 @@
 <table id="myTable">
 	<thead>
 		<tr>        
-        <%= form_tag products_path, :method => "get" do %>
-            <%= text_field_tag :search, params[:search] %>
-            <%= submit_tag "Search", :contact_name => nil %>
-        <% end %>
+        <%#= form_tag products_path, :method => "get" do %>
+            <%#= text_field_tag :search, params[:search] %>
+            <%#= submit_tag "Search", :contact_name => nil %>
+        <%# end %>
                   
     </tr>
 		<tr  class="header">
@@ -31,9 +31,6 @@
 <% if @products.present? %>
 	<%= will_paginate @products %>
 <% end %>
-
-
-
 
 <style>
 * {

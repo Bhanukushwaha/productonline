@@ -61,3 +61,4 @@ gem 'jquery-rails'
 gem 'activeadmin'
 gem 'will_paginate'
 gem 'kaminari'
+gem "paranoia"

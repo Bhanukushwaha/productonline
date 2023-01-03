@@ -8,6 +8,7 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.js" integrity="sha512-nO7wgHUoWPYGCNriyGzcFwPSF+bPDOR+NvtOYy2wMcWkrnCNPKBcFEkU80XIN14UVja0Gdnff9EmydyLlOL7mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   </head>
   <body>    
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -25,48 +26,56 @@
             <a href="/carts" class="nav-link">Cart(<%= current_cart.cart_items.count rescue nil%>)</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-             <a class="dropdown-item" href="#">Action</a>
-             <a class="dropdown-item" href="#">Another action</a>
-             <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter category
+            </a>
+            <div class="dropdown-menu">
+              <% Category.all.each do |category| %>
+              <a class="dropdown-item" href="/category_details/<%= category.id%>/products"><%= category.title %></a>
+              <% end %>
             </div>
           </li>
           <% end %>
-        </ul>                
-        <form class="form-inline my-2 my-lg-0">
+        </ul>
+
+        <!-- <form class="form-inline my-2 my-lg-0"> -->
+        <%= form_tag products_path, :method => "get", class: "form-inline my-2 my-lg-0" do %>
           <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="/manage"><span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">settings</a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <% if user_signed_in? %>
-            <a class="dropdown-item">
-              <strong><%= current_user.email %></strong>               
-            </a>            
-            <a>              
-              <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'dropdown-item'  %>
-            </a>
-            <a>              
-              <%= link_to 'Edit profile', edit_user_registration_path, :class => 'dropdown-item' %>
-            </a>
-             <% else %>
-            <a>
-             <%= link_to "Sign up", new_user_registration_path, :class => 'dropdown-item'  %>             
-            </a>
-            <a>
-              <%= link_to "Login", new_user_session_path, :class => 'dropdown-item'  %>
-            </a>
-            <% end %> 
-          </div>
-        </li>
-      </ul> 
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+            <li class="nav-item active">
+              <a class="nav-link" href="/manage"><span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= user_signed_in? ? current_user.first_name : "Login"%></a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <% if user_signed_in? %>
+                <a class="dropdown-item">
+                  <strong><%= current_user.email %></strong>             
+                </a>                  
+                <a class="dropdown-item" href="/addresses">addresses</a>
+                <a href="/orders" class='dropdown-item'>Orders</a>          
+                <a>              
+                  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'dropdown-item'  %>
+                </a>
+                <a>              
+                  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'dropdown-item' %>
+                </a>
+                 <% else %>
+                <a>
+                 <%= link_to "Sign up", new_user_registration_path, :class => 'dropdown-item'  %>             
+                </a>
+                <a>
+                  <%= link_to "Login", new_user_session_path, :class => 'dropdown-item'  %>
+                </a>
+                <% end %> 
+              </div>
+            </li>
+          </ul> 
+          <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
+          <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
+          
+            <%= text_field_tag :search, params[:search], class: "form-control mr-sm-2" %>
+            <%= submit_tag "Search", :contact_name => nil, class: "btn btn-outline-success my-2 my-sm-0" %>
+        <% end %>
+        <!-- </form> -->
       </div>
     </nav>
     <%= yield %>

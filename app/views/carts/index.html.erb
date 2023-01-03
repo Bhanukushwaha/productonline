@@ -13,34 +13,44 @@
 	</thead>
 	<tbody>	
 		<% @cart_items.each do |cart_item| %>
-			<tr>
-				<td><%= cart_item.product.name %></td>
-				<td><%= cart_item.product.description %></td>
-				<td><% if cart_item&.product&.pictures.any? %>
-					<%= image_tag url_for(cart_item&.product&.pictures.last), hight:150,width:150 %>
-					<% end %>
-				</td>
-					<!-- <td><%#= cart_item.quantity %></td> -->
-				<td>
-					<div class="btn-group mr-2" role="group" aria-label="First 
-				    group"><% unless cart_item.quantity.to_i == 1 %>
-	          <div><%= link_to "-", update_cart_item_quantity_path(type: "decrease", cart_item_id: cart_item.id), class: "btn btn-danger", remote: true %>
-	          </div>
-	          <% end %>
-	          <div>
-	            <%= text_field_tag :quantity, cart_item.quantity, style: " height:35px;width:80px;", class: "text-center", min: 1 %>
-	          </div>
-	          <div><%= link_to "+", update_cart_item_quantity_path(type: "increase", cart_item_id: cart_item.id), class: "btn btn-success", remote: true %>	          	
-	          </div>
-          </div>        
+		  <% if cart_item.product.present? %>
+				<tr>
+					<td><%= cart_item&.product&.name %></td>
+					<td><%= cart_item&.product&.description %></td>
+					<td><% if cart_item&.product&.pictures.present? %>
+						<%= image_tag url_for(cart_item&.product&.pictures.last), hight:150,width:150 %>
+						<% end %>
 					</td>
-					<td><%= cart_item.price %></td>
-					<td><%= cart_item.unit_price %></td>
-					<td><%= link_to "Remove",  product_remove_cart_path(cart_item.product.id)  %></td>
-			</tr>
+						<!-- <td><%#= cart_item.quantity %></td> -->
+					<td>
+						<div class="btn-group mr-2" role="group" aria-label="First 
+					    group">
+					    <% unless cart_item.quantity.to_i == 1 %>
+			          <div><%= link_to "-", update_cart_item_quantity_path(type: "decrease", cart_item_id: cart_item.id), class: "btn btn-danger", remote: true %>
+			          </div>
+		          <% end %>
+		          <div>
+		            <%= text_field_tag :quantity, cart_item.quantity, style: " height:35px;width:80px;", class: "text-center", min: 1 %>
+		          </div>
+		          <div><%= link_to "+", update_cart_item_quantity_path(type: "increase", cart_item_id: cart_item.id), class: "btn btn-success", remote: true %>        	
+		          </div>
+	          </div>        
+						</td>
+						<td><%= cart_item.price %></td>
+						<td><%= cart_item.unit_price %></td>
+						<td><%= link_to "Remove",  product_remove_cart_path(cart_item.product.id)  %></td>
+			  </tr>
+			<% end %>
 		<% end %>		
 	</tbody>
 </table>
+<br>
+<div class="float-right p-2 mb-2 bg-success text-white " style="margin-right: 3%">Total price: <%= current_cart.sub_total %></div>
+>
+<div class="float-right p-2 mb-2 bg-success text-white " style="margin-right: 5%" >
+  Total Quantity: <%= current_cart.quantity %>&nbsp;&nbsp;
+</div>
+
 <style>
 * {
   box-sizing: border-box;

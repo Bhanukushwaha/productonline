@@ -1,5 +1,5 @@
 class AmazonsController < ApplicationController
-  
+    # before_action :authenticate_user!
   def index
   	@amazons = Amazon.all
   end
