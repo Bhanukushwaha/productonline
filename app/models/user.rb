@@ -5,5 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :favorites
   has_one :cart
+  has_many :orders, dependent: :destroy
   has_many :addresses, dependent: :destroy
+  has_many :reviews, dependent: :destroy
 end

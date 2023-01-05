@@ -4,5 +4,6 @@ class Product < ApplicationRecord
   attr_accessor :images
   has_many_attached :pictures
   belongs_to :category
+  has_many :reviews, dependent: :destroy
   has_many :cart_items, dependent: :destroy
 end

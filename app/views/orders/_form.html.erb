@@ -1,51 +1,51 @@
-<div class="container">
-<%= form_with(model: order) do |form| %>
-  <% if order.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+<div class ="container">
+    <%= form_with(model: order, local: true) do |form| %>
+      <% if order.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
 
-      <ul>
-        <% order.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+          <ul>
+          <% order.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <%#= form.hidden_field :cart_id, :value => @cart.id %>
+      <%= form.hidden_field :user_id, :value => current_user.id %>
+      <%#= form.hidden_field :order_id, :value => current_user.id %>
+      <%#= form.hidden_field :product_id, :value => @product.id %>
+      <%#= form.hidden_field :price, :value => @product.discount_price %>
+
+
+      <div class="field">
+         <label for="first_name">first_name</label>
+        <%= form.text_field :first_name, class: "form-control" %>
+      </div>
+
+      <div class="field">
+        <label for="last_name">last_name</label>
+        <%= form.text_field :last_name, class: "form-control" %>
+      </div>
+
+      <div class="field">
+        <label for="email">email</label>
+        <%= form.text_field :email, class: "form-control" %>
+      </div>
+
+      <div class="field">
+         <label for="phone">phone</label>
+        <%= form.text_field :phone, class: "form-control" %>
+      </div>
+
+      <div class="field">
+        <strong for="choose_address">Choose Address</strong>
+        <% current_user.addresses.each do |ad|%>
+          <p><input type="radio" name="order[address_id]" class="choose_address" value="<%= ad.id %>"> <%= ad.full_address %></p>
         <% end %>
-      </ul>
-    </div>
-  <% end %>  
-
-  <div class="field">
-    <%= form.label :first_name %>
-    <%= form.text_field :first_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :last_name %>
-    <%= form.text_field :last_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.number_field :email %>
-  </div>
-
-  <div class="field">
-    <%= form.label :phone %>
-    <%= form.number_field :phone %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-
-
-</div>
-<div class="field">
-  <strong for="choose_address">Choose Address</strong>
-  <% current_user.addresses.each do |ad|%>
-  <p><input type="radio" name="order[address_id]" class="choose_address" value="<%= ad.id %>"> <%= ad.full_address %></p>
-  <% end %>
-  <a href="/addresses/new?cart=new_address" class="btn btn-success", style= "color:white;">Add new address</a>
-</div>
-<% if current_user.addresses.any? %> 
+        <a href="/addresses/new?cart=new_address" class="btn btn-success", style= "color:white;">Add new address</a>
+      </div>
+      <% if current_user.addresses.any? %> 
         <article>
           <% if flash[:error].present? %>
           <div id="error_explanation">
@@ -56,7 +56,13 @@
           <span>Amount: $<%= current_cart.sub_total %></span>
           </label>
         </article>
-         
+         <input 
+          type="submit", class="btn btn-success" style= "color:white;" disabled="disabled"
+          value="Pay with Card"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-description="A month's subscription"
+          data-amount="<%= current_cart.sub_total * 100 %>"
+          data-locale="auto">
            <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
            <script src="https://checkout.stripe.com/v2/checkout.js"></script>
            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
@@ -65,8 +71,7 @@
         
       <% end %>
     <% end %>
-
-
+</div>
 <script>
   $(document).ready(function() {
       $(':submit').on('click', function(event) {

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_03_064011) do
+ActiveRecord::Schema.define(version: 2023_01_04_155624) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -143,6 +143,7 @@ ActiveRecord::Schema.define(version: 2023_01_03_064011) do
     t.boolean "is_active", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "customer"
   end
 
   create_table "products", force: :cascade do |t|
@@ -154,7 +155,19 @@ ActiveRecord::Schema.define(version: 2023_01_03_064011) do
     t.string "unit_price"
     t.integer "category_id"
     t.datetime "deleted_at"
+    t.string "size"
+    t.string "status"
     t.index ["deleted_at"], name: "index_products_on_deleted_at"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "rating"
+    t.text "comment"
+    t.integer "user_id"
+    t.integer "product_id"
+    t.integer "order_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "students", force: :cascade do |t|

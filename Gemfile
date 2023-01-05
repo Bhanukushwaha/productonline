@@ -62,3 +62,5 @@ gem 'activeadmin'
 gem 'will_paginate'
 gem 'kaminari'
 gem "paranoia"
+gem 'stripe'
+gem "figaro"
