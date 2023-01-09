@@ -45,6 +45,7 @@
         <% end %>
         <a href="/addresses/new?cart=new_address" class="btn btn-success", style= "color:white;">Add new address</a>
       </div>
+
       <% if current_user.addresses.any? %> 
         <article>
           <% if flash[:error].present? %>
@@ -54,8 +55,10 @@
           <% end %>
           <label class="amount">
           <span>Amount: $<%= current_cart.sub_total %></span>
-          </label>
+          </label>          
         </article>
+        
+        <div>
          <input 
           type="submit", class="btn btn-success" style= "color:white;" disabled="disabled"
           value="Pay with Card"
@@ -67,10 +70,13 @@
            <script src="https://checkout.stripe.com/v2/checkout.js"></script>
            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
       <% else %>
-        <a href="/addresses/new?cart=new_address" class="btn btn-success", style= "color:white;">Please add new address </a>
-        
+        <a href="/addresses/new?cart=new_address" class="btn btn-success", style= "color:white;">Please add new address </a>        
       <% end %>
+    </div><br>
+    <!-- <button type="checkout", class="btn btn-success" style= "color:white;" disabled="disabled" value="cash_on_delivery" data-amount="<%#= current_cart.sub_total * 100 %>">Cash on Delivery</button> -->
+      
     <% end %>
+
 </div>
 <script>
   $(document).ready(function() {
@@ -92,6 +98,7 @@
   $(function(){
     $("input[type='radio']").change(function(){
       $("input[type='submit']").prop("disabled", false);
+      $("button[type='checkout']").prop("disabled", false);
     });
   });
   $(document).ready(function(){

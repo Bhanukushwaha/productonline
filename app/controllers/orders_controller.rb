@@ -19,8 +19,10 @@ class OrdersController < InheritedResources::Base
     # @product = @order.product
     @cart_item = CartItem.find(params[:cart_item])
     @product = Product.unscoped.find(@cart_item.product_id)
+
     @reviews = @product.reviews.to_a
     @avg_rating = if @reviews.blank?
+
       0
     else
       @product.reviews.average(:rating).present? ? @product.reviews.average(:rating).round(2) : 0
@@ -33,30 +35,59 @@ class OrdersController < InheritedResources::Base
     end
   end
 
+  def delevery
+    byebug
+    address = Address.find(params[:order][:address_id])  
+    @order = Order.new(order_params)
+    @order.country = address.country
+    @order.postal_code = address.post_code
+    @order.address = address.address
+    @order.town = @order.district = address.district    
+    @order.order_type = "Cash on Delevery"
+    @order.description = 'Rails Stripe customer'
+    @order.cart_id = current_cart.id
+    @order.price = charge.amount
+    respond_to do |format|
+      if @order.save
+        current_cart.update(is_done: true)
+        # UserMailer.order_product(current_user).deliver_later
+        format.html { redirect_to orders_path, notice: 'Order was successfully created.' }
+        format.json { render :show, status: :created, location: @order }
+      else
+        format.html { render :new }
+        format.json { render json: @order.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
 
   def create
     # @product = Product.find(params[:order][:product_id])
     # @cart = Cart.find(params[:order][:cart_id])
-    customer = Stripe::Customer.create({email: params[:stripeEmail], source: params[:stripeToken],})
+    if params[:order][:cash_on_delivery] =! "cash_on_delivery"
+      customer = Stripe::Customer.create({email: params[:stripeEmail], source: params[:stripeToken],})
       charge = Stripe::Charge.create({
         customer: customer.id,
         amount: current_cart.sub_total.to_i,
         description: 'Rails Stripe customer',
-        currency: 'usd',
-        
+        currency: 'usd',        
       })
-
-    
+    end
     address = Address.find(params[:order][:address_id])  
     @order = Order.new(order_params)
     @order.country = address.country
     @order.postal_code = address.post_code
     @order.address = address.address
     @order.town = @order.district = address.district
-    @order.customer = customer.id
+    @order.customer = customer&.id ? customer&.id : nil
+    @order.order_type = "online Paid"
     @order.description = 'Rails Stripe customer'
     @order.cart_id = current_cart.id
-    @order.price = charge.amount
+    if params[:order][:cash_on_delivery] =! "cash_on_delivery"
+      @order.price = charge.amount
+    else
+      @order.price = current_cart.sub_total
+    end
     respond_to do |format|
       if @order.save
         current_cart.update(is_done: true)

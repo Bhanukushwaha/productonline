@@ -12,7 +12,7 @@
   </head>
   <body>    
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Commers</a>
+      <a class="navbar-brand" href="#">Commerce</a>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">            
@@ -72,7 +72,7 @@
           <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
           <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
           
-            <%= text_field_tag :search, params[:search], class: "form-control mr-sm-2" %>
+            <%= text_field_tag :search, params[:search], class: "form-control mr-sm-2", placeholder: "search products" %>
             <%= submit_tag "Search", :contact_name => nil, class: "btn btn-outline-success my-2 my-sm-0" %>
         <% end %>
         <!-- </form> -->

@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
   resources :reviews
   resources :orders
+  resources :feedbacks
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   resources :amazons
   devise_for :users
-  root 'amazons#index'
+  root 'products#index'
   resources :amazons, :only => [:index,:new,:destroy,:create,:show]
 
   resources :students
@@ -30,6 +31,7 @@ Rails.application.routes.draw do
 
 
   get "/favorites", to: "favorites#index"
+  get "/orders_cash", to: 'orders#delevery'
   resources :carts  
   get "/update_cart_item_quantity/:type/:cart_item_id" => "carts#update_cart_item_quantity", as: :update_cart_item_quantity
 end

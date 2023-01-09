@@ -5,7 +5,7 @@ ActiveAdmin.register Product do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-   permit_params :name, :description, :price, :images,:unit_price,:category_id
+   permit_params :name, :description, :price, :images, :unit_price,:size, :status,:category_id
   #
   # or
   #
@@ -20,6 +20,8 @@ ActiveAdmin.register Product do
       f.input :description
       f.input :price
       f.input :unit_price
+      f.input :size
+      f.input :status
       f.input :category, as: :select, collection: Category.all.map { |c| [c.title, c.id] }, include_blank: false, :input_html => { :width => 'auto' }
       f.input :images, as: :file, input_html: { multiple: true }
     end
