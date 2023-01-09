@@ -1,5 +1,4 @@
 ActiveAdmin.register Product do
-
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -27,8 +26,7 @@ ActiveAdmin.register Product do
     end
     f.actions         # adds the 'Submit' and 'Cancel' buttons
   end
-  controller do
-    
+  controller do    
     def create
       super
       # resource

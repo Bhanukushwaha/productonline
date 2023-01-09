@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     get :remove_cart 
   	resources :favorites do
       collection do
-        get :add_favorite
+        get :add_favorite 
         get :remove_favorite
       end
     end
