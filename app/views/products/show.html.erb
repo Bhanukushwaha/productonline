@@ -39,17 +39,20 @@
           
           <div class="action">
           	<% if user_signed_in? %>
-            <% if current_cart.cart_items.where(product_id: @product.id).first.present? %>
-            <%= link_to "Go to Cart", carts_path, class: 'add-to-cart btn btn-default', style: "color:white;" %>
-            <% else %>
-            <%= link_to 'add to cart', product_add_cart_path(@product.id), class: "add-to-cart btn btn-default", style: "color:white;" %>
-            <% end %>          
+              <% if current_cart.cart_items.where(product_id: @product.id).first.present? %>
+              <%= link_to "Go to Cart", carts_path, class: 'add-to-cart btn btn-default', style: "color:white;" %>
+              <% else %>
+              <%= link_to 'add to cart', product_add_cart_path(@product.id), class: "add-to-cart btn btn-default", style: "color:white;" %>
+              <% end %>          
            
-            <% unless Favorite.find_by(user_id: current_user&.id, product_id: @product.id).present? %>
-						 <%= link_to 'Add to favorites', add_favorite_product_favorites_path(@product.id), class: 'add-to-cart btn btn-default', style: "color:white;" %>
-							<% else %>
-							  <%= link_to 'Remove from favorites', remove_favorite_product_favorites_path(@product.id), class: 'add-to-cart btn btn-default', style: "color:white;" %>
+              <% unless Favorite.find_by(user_id: current_user&.id, product_id: @product.id).present? %>
+  						  <%= link_to 'Add to favorites', add_favorite_product_favorites_path(@product.id), class: 'add-to-cart btn btn-default', style: "color:white;" %>
+  							<% else %>
+  							  <%= link_to 'Remove from favorites', remove_favorite_product_favorites_path(@product.id), class: 'add-to-cart btn btn-default', style: "color:white;" %>
 							<% end %>
+            <% else %>
+              <%= link_to 'add to cart', new_user_session_path, class: "add-to-cart btn btn-default", style: "color:white;" %>
+              <%= link_to 'Add to favorites', new_user_session_path, class: 'add-to-cart btn btn-default', style: "color:white;" %>
             <% end %>            
             <div style="margin-top: 8px;">
             <%= link_to 'Back', products_path, class: "btn btn-outline-info" %>  

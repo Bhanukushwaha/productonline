@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-	  before_action :authenticate_user!
+	  before_action :authenticate_user!, only: [:add_cart]
 	def index
 		if params[:search].present?
 			@products = Product.where("lower(name) LIKE ? OR lower(description) LIKE ?", "%#{params[:search].strip.downcase}%","%#{params[:search].strip.downcase}%").paginate(page: params[:page], per_page: 10)

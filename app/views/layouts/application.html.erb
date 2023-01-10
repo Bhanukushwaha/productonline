@@ -18,13 +18,6 @@
           <li class="nav-item">            
             <a href="/products" class="nav-link">products</a>
           </li>
-          <% if user_signed_in? %>
-          <li class="nav-item">                 
-            <a href="/favorites" class="nav-link">Favorites</a>
-          </li>
-          <li class="nav-item">                     
-            <a href="/carts" class="nav-link">Cart(<%= current_cart.cart_items.count rescue nil%>)</a>
-          </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter category
             </a>
@@ -33,6 +26,13 @@
               <a class="dropdown-item" href="/category_details/<%= category.id%>/products"><%= category.title %></a>
               <% end %>
             </div>
+          </li>
+          <% if user_signed_in? %>
+          <li class="nav-item">                 
+            <a href="/favorites" class="nav-link">Favorites</a>
+          </li>
+          <li class="nav-item">                     
+            <a href="/carts" class="nav-link">Cart(<%= current_cart.cart_items.count rescue nil%>)</a>
           </li>
           <% end %>
         </ul>
