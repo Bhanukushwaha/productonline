@@ -64,3 +64,4 @@ gem 'kaminari'
 gem "paranoia"
 gem 'stripe'
 gem "figaro"
+gem 'ckeditor'

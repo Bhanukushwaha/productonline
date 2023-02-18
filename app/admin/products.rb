@@ -13,10 +13,28 @@ ActiveAdmin.register Product do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+  index do
+    selectable_column
+    id_column
+    column :name
+    column :description do |object|
+      if object&.description.present?
+        object&.description.html_safe
+      end
+    end
+    # column :description
+    column :price
+    column :images
+    column :unit_price
+    column :size
+    column :status
+    column :category_id
+    actions
+  end
   form do |f|
     f.inputs do
       f.input :name
-      f.input :description
+      f.input :description, :input_html => { :class => "ckeditor" , :height => 400}
       f.input :price
       f.input :unit_price
       f.input :size
@@ -24,9 +42,9 @@ ActiveAdmin.register Product do
       f.input :category, as: :select, collection: Category.all.map { |c| [c.title, c.id] }, include_blank: false, :input_html => { :width => 'auto' }
       f.input :images, as: :file, input_html: { multiple: true }
     end
-    f.actions         # adds the 'Submit' and 'Cancel' buttons
+    f.actions        # adds the 'Submit' and 'Cancel' buttons
   end
-  controller do    
+  controller do
     def create
       super
       # resource
