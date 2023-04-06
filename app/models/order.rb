@@ -5,4 +5,8 @@ class Order < ApplicationRecord
 	def full_address
 	  "#{address} #{district} #{country}-#{postal_code}"
 	end
+	validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :email, presence: true
+  validates :phone, presence: false
 end

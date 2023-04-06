@@ -1,5 +1,4 @@
 ActiveAdmin.register Feedback do
-
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -20,7 +19,6 @@ ActiveAdmin.register Feedback do
       f.input :user_id, as: :select, collection: User.all.map { |c| [c.first_name, c.id] }, include_blank: false, :input_html => { :width => 'auto' }
       f.input :description
     end
-    f.actions         # adds the 'Submit' and 'Cancel' buttons
-  end
-  
+    f.actions    # adds the 'Submit' and 'Cancel' buttons
+  end  
 end
