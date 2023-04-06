@@ -1,5 +1,5 @@
 <div class ="container">
-  <%= link_to 'Back', :back, class: "btn btn-primary" %>
+  <%= link_to 'Back', orders_path, class: "btn btn-primary" %>
 
     <%= form_with(model: order, local: true) do |form| %>
       <% if order.errors.any? %>
