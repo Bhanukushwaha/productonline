@@ -15,36 +15,34 @@
     </tr>
   </thead>
   <tbody>
-      <% current_user.orders.each do |order| %>
-        <% order.cart.cart_items.each do |item| %>
-          <% product = Product.unscoped.find(item.product_id)%>
-          <tr>
-            <td><%= product.name %></td>
-            <% if product.pictures.present? %>
-            <td><%= image_tag url_for(product.pictures.last), hight:150,width:150 %></td>
-            <% else %>
-            <td></td>
-            <% end %>
-            <td><%= item.unit_price %> <b>(quantity: <%= item.quantity%>)</b></td>
-            <td><%= product.size %></td>
-            <td><%= product.status %></td>
-            <td><%= order.full_address %></td>
-            <td><%= link_to 'Rate & Review Product', order_path(order.id,cart_item: item.id), class: 'btn btn-primary', style: "color:white;" %></td>
-          </tr>
-        <% end %>
+    <% current_user.orders.each do |order| %>
+      <% order.cart.cart_items.each do |item| %>
+        <% product = Product.unscoped.find(item.product_id)%>
         <tr>
-          <% if order.cart.cart_items.any? %>
-            <th><b>Total Quantity <%= order.cart.quantity%></b></th>
-            <th><b>Total Price <%= order.cart.sub_total%><b></th>
-            <td>Order Date <%= order.created_at %></td>
+          <td><%= product.name %></td>
+          <% if product.pictures.present? %>
+          <td><%= image_tag url_for(product.pictures.last), hight:150,width:150 %></td>
           <% else %>
+          <td></td>
           <% end %>
+          <td><%= item.unit_price %> <b>(quantity: <%= item.quantity%>)</b></td>
+          <td><%= product.size %></td>
+          <td><%= product.status %></td>
+          <td><%= order.full_address %></td>
+          <td><%= link_to 'Rate & Review Product', order_path(order.id,cart_item: item.id), class: 'btn btn-primary', style: "color:white;" %></td>
         </tr>
       <% end %>
-    </tbody>
+      <tr>
+        <% if order.cart.cart_items.any? %>
+          <th><b>Total Quantity <%= order.cart.quantity%></b></th>
+          <th><b>Total Price <%= order.cart.sub_total%><b></th>
+          <td>Order Date <%= order.created_at %></td>
+        <% else %>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
-
-
 <style>
 * {
   box-sizing: border-box;

@@ -1,0 +1,124 @@
+<div class="containers">
+  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class="sliders1 d-block  w-100">
+          <div class="cardname">
+            <h1>Lenevo Leptop</h1>
+            <h3>UP To 50% OFF</h3>
+            <p>The main disadvantage is the screen it is LCD looking like not so good.</p>
+          </div>
+          <img class="slider d-block w-40 " src="<%= asset_path('07.png')%>" alt="Second slide">          
+        </div>       
+      </div>
+      <div class="carousel-item">
+        <div class="sliders2 d-block  w-100">
+          <div class="cardname">
+            <h1>Smart watch </h1>
+            <h3>UP To 40% OFF</h3>
+            <p>You need to go to the watch menu options and tap on �Heart Rate�.</p>
+          </div>
+          <img class="slider d-block w-40 " src="<%= asset_path('09.png')%>" alt="Second slide">          
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="sliders3 d-block  w-100">
+          <div class="cardname">
+            <h1>Vivo Mobile</h1>
+            <h3>UP To 25% OFF</h3>
+            <p>Get brand authorised repairs for all phone damages with free pickup and drop</p>
+          </div>
+          <img class="slider d-block w-40 " src="<%= asset_path('06.png')%>" alt="Second slide">          
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="card">
+        <img class="card-img-top" src="<%= asset_path('libraryimg.jpg')%>" alt="Card image cap">
+
+        <div class="card-body">
+          <h5 class="card-title">Special title treatment</h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="card">
+        <img class="card-img-top" src="<%= asset_path('07.png')%>" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Special title treatment</h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="card">
+        <img class="card-img-top" src="<%= asset_path('libraryimg.jpg')%>" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Special title treatment</h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="card">
+        <img class="card-img-top" src="<%= asset_path('libraryimg.jpg')%>" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Special title treatment</h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+ 
+  .carousel-item{
+    position: relative;
+    padding-top: 10px;
+  }
+  .sliders1{
+    height: 270px;
+    margin-bottom: 10px;
+     background: linear-gradient(to right, #3DC2EC,  #1F316F);
+  }
+  .sliders2{
+    height: 270px;
+    margin-bottom: 10px;
+    background: linear-gradient(to right,  #FF9EAA 33.33%, #FF6347 66.66%);
+  }
+  .sliders3{
+    height: 270px;
+    margin-bottom: 10px;
+    background: linear-gradient(to right,  #78B7D0 33.33%, #5C88C4 66.66%);
+  }
+  .containers{
+    width: 95%;
+    margin-left: 40px;
+  }
+  .slider{
+    height: 250px;
+    margin-left: 65%;
+    padding-top: 30px;
+  }
+  .cardname{
+    margin-top: 10vh;
+    margin-left: 20%;
+    position: absolute;
+    color: white;
+  }
+</style>

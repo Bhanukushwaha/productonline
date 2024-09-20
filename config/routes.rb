@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   get '/addresses/:id' =>"addresses#show", :as => "address"
   patch '/addresses/:id' =>"addresses#update"
   delete '/addresses/:id' =>"addresses#destroy"
-
+  get 'generate_report' =>"products#generate_report"
 
   get "/favorites", to: "favorites#index"
   get "/orders_cash", to: 'orders#delevery'

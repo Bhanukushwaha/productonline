@@ -12,14 +12,14 @@
   </head>
   <body>    
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Commerce</a>
+      <a class="navbar-brand" href="#" style="color: #A91D3A;">Smart Shop</a>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">            
             <a href="/products" class="nav-link">products</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter category
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"aria-expanded="false">Filter category
             </a>
             <div class="dropdown-menu">
               <% Category.all.each do |category| %>
@@ -36,7 +36,6 @@
           </li>
           <% end %>
         </ul>
-
         <!-- <form class="form-inline my-2 my-lg-0"> -->
         <%= form_tag products_path, :method => "get", class: "form-inline my-2 my-lg-0" do %>
           <ul class="navbar-nav mr-auto">
@@ -70,14 +69,13 @@
             </li>
           </ul> 
           <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
-          <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
-          
-            <%= text_field_tag :search, params[:search], class: "form-control mr-sm-2", placeholder: "search products" %>
-            <%= submit_tag "Search", :contact_name => nil, class: "btn btn-outline-success my-2 my-sm-0" %>
+          <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->          
+          <%= text_field_tag :search, params[:search], class: "form-control mr-sm-2", placeholder: "search products" %>
+          <%= submit_tag "Search", :contact_name => nil, class: "btn btn-outline-success my-2 my-sm-0" %>
         <% end %>
         <!-- </form> -->
       </div>
-    </nav>
+    </nav>  
     <%= yield %>
   </body>
 </html>

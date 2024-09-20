@@ -1,6 +1,5 @@
 class OrdersController < InheritedResources::Base
   before_action :authenticate_user!
-
   def order_pdf
     @orders = current_user.orders
      respond_to do |format|
@@ -19,11 +18,8 @@ class OrdersController < InheritedResources::Base
     # @product = @order.product
     @cart_item = CartItem.find(params[:cart_item])
     @product = Product.unscoped.find(@cart_item.product_id)
-
     @reviews = @product.reviews.to_a
     @avg_rating = if @reviews.blank?
-
-      0
     else
       @product.reviews.average(:rating).present? ? @product.reviews.average(:rating).round(2) : 0
     end
@@ -36,7 +32,6 @@ class OrdersController < InheritedResources::Base
   end
 
   def delevery
-    byebug
     address = Address.find(params[:order][:address_id])  
     @order = Order.new(order_params)
     @order.country = address.country
@@ -120,14 +115,13 @@ class OrdersController < InheritedResources::Base
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_order
-      @order = Order.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_order
+    @order = Order.find(params[:id])
+  end
 
   private
-    def order_params
-      params.require(:order).permit(:user_id, :cart_id, :product_id, :price, :decimal, :quantity, :first_name, :last_name, :email, :phone, :country, :address, :town, :district, :postal_code, :description, :address_id)
-    end
-
+  def order_params
+    params.require(:order).permit(:user_id, :cart_id, :product_id, :price, :decimal, :quantity, :first_name, :last_name, :email, :phone, :country, :address, :town, :district, :postal_code, :description, :address_id)
+  end
 end

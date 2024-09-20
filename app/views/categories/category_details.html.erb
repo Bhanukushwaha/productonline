@@ -1,72 +1,168 @@
+<tr>        
+  <%#= form_tag products_path, :method => "get" do %>
+    <%#= text_field_tag :search, params[:search] %>
+    <%#= submit_tag "Search", :contact_name => nil %>
+  <%# end %>                  
+</tr>
 
-<table id="myTable">
-	<thead>
-		<tr>        
-        <%#= form_tag products_path, :method => "get" do %>
-            <%#= text_field_tag :search, params[:search] %>
-            <%#= submit_tag "Search", :contact_name => nil %>
-        <%# end %>
-                  
-    </tr>
-		<tr  class="header">
-			<th>ID</th>
-			<th>name</th>
-			<th>description</th>
-			<th>price</th>
-			<th colspan="1">Action</th>
-		</tr>
-	</thead>
-	<tbody>
-		<% @products.each do |product| %>
-			<tr>
-		  	  <td><%= product.id %></td>
-				<td><%= product.name %></td>
-				<td><%= product.description %></td>
-				<td><%= product.price %></td>
-				<td><%= link_to "Details", product %></td>
-			</tr>
-		<% end %>		
-	</tbody>
-</table>
 <% if @products.present? %>
 	<%= will_paginate @products %>
 <% end %>
 
+<div class="containers">
+	<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+	  <div class="carousel-inner">
+	    <div class="carousel-item active">
+	    	<div class="sliders1 d-block  w-100">
+	    		<div class="cardname">
+	    			<h1>Lenevo Leptop</h1>
+	    			<h3>UP To 50% OFF</h3>
+	    			<p>The main disadvantage is the screen it is LCD looking like not so good.</p>
+	    		</div>
+	    		<img class="slider d-block w-40 " src="<%= asset_path('07.png')%>" alt="Second slide">	    		
+	    	</div>	     
+	    </div>
+	    <div class="carousel-item">
+	      <div class="sliders2 d-block  w-100">
+	    		<div class="cardname">
+	    			<h1>Smart watch </h1>
+	    			<h3>UP To 40% OFF</h3>
+	    			<p>You need to go to the watch menu options and tap on �Heart Rate�.</p>
+	    		</div>
+	    		<img class="slider d-block w-40 " src="<%= asset_path('09.png')%>" alt="Second slide">	    		
+	    	</div>
+	    </div>
+	    <div class="carousel-item">
+	      <div class="sliders3 d-block  w-100">
+	    		<div class="cardname">
+	    			<h1>Vivo Mobile</h1>
+	    			<h3>UP To 25% OFF</h3>
+	    			<p>Get brand authorised repairs for all phone damages with free pickup and drop</p>
+	    		</div>
+	    		<img class="slider d-block w-40 " src="<%= asset_path('06.png')%>" alt="Second slide">	    		
+	    	</div>
+	    </div>
+	  </div>
+	  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+	    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	    <span class="sr-only">Previous</span>
+	  </a>
+	  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+	    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+	    <span class="sr-only">Next</span>
+	  </a>
+	</div>
+	<div class="row">
+	  <% @products.each do |product| %>
+	    <div class="col-sm-3">
+	      <div class="img-card card">
+	        <% if product.pictures.present? %>
+	          <%= image_tag url_for(product.pictures.last), class: "card-img-top" %>        
+	        <% else %>
+	          <img class="card-img-top" src="<%= asset_path('libraryimg.jpg')%>" alt="Card image cap">
+	        <% end %>          
+	        <div class="card-body">              
+	          <p class="card-title"><%= product.name %></p>          
+	          <!-- Flex container for button and price -->
+	          <div class="d-flex justify-content-between align-items-center">
+	            <h4 class="card-text mb-0" style="color:black;">From Rs.<%= product.price %></h4>
+	            <%= link_to "Details", product, class: "btn btn-primary" %>
+	          </div>          
+	        </div>
+	      </div>
+	    </div>
+	  <% end %>  
+  </div>
+</div>
+
+
 <style>
-* {
-  box-sizing: border-box;
-}
+	* {
+	  box-sizing: border-box;
+	}	
+	.card-body {
+	  padding: 15px;
+	  background-color: #F7F7F8;
+	}
 
-#myInput {
-  background-image: url('/css/searchicon.png');
-  background-position: 10px 10px;
-  background-repeat: no-repeat;
-  width: 70%;
-  border-radius: 10px;
-  font-size: 16px;
-  padding: 12px 20px 8px 40px;
-  border: 1px solid #ddd;
-  margin-bottom: 14px;
-}
+	.btn {
+	  padding: 6px 12px;
+	}
 
-#myTable {
-  border-collapse: collapse;
-  width: 100%;
-  border: 1px solid #ddd;
-  font-size: 18px;
-}
+	.card-text {
+	  font-size: 1.1rem;
+	  color: #333;
+	}
 
-#myTable th, #myTable td {
-  text-align: left;
-  padding: 7px;
-}
+	.img-card {
+	  box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+	  transition: all 0.3s ease;
+	}
 
-#myTable tr {
-  border-bottom: 1px solid #ddd;
-}
+	.img-card:hover {
+	  transform: translateY(-5px);
+	}	
+	.img-card:hover img{
+    transform:scale(1.1);		
+	}
+	.img-card img{
+		max-height: 70%;
+		padding: 10px;
+	}
+	.img-card{
+		height:80%;
+    width: 100%;
+    object-fit: cover;
+	}	
+	.sliders1{
+    height: 270px;
+    margin-bottom: 10px;
+     background: linear-gradient(to right, #3DC2EC,  #1F316F);
+  }
+  .sliders2{
+  	height: 270px;
+    margin-bottom: 10px;
+    background: linear-gradient(to right,  #FF9EAA 33.33%, #FF6347 66.66%);
+  }
+  .sliders3{
+  	height: 270px;
+    margin-bottom: 10px;
+    background: linear-gradient(to right,  #78B7D0 33.33%, #5C88C4 66.66%);
+  }
+  .containers{
+  	width: 95%;
+  	margin-left: 40px;
+  }
+  .slider{
+  	height: 250px;
+  	margin-left: 65%;
+  	padding-top: 30px;
+  }
+  .cardname{
+  	margin-top: 10vh;
+  	margin-left: 20%;
+  	position: absolute;
+  	color: white;
+  }
+  .row {
+	  display: flex;
+	  flex-wrap: wrap; /* Ensure that columns wrap as needed */
+	}
 
-#myTable tr.header, #myTable tr:hover {
-  background-color: #f1f1f1;
-}
+	.col-sm-3 {
+	  display: flex;
+	  flex-direction: column; /* Ensure that column items stack vertically */
+	}
+
+	.img-card {
+	  flex: 1; /* Ensure that the card grows to fill available space */
+	  display: flex;
+	  flex-direction: column; /* Ensure that card body stacks below image */
+	}
+	.card-img-top {
+	   /* Ensures the image covers the available space without distortion */
+	  height: 250px; /* Sets a consistent height for all images */
+	  width: 100%; /* Ensures the image width is consistent */
+	}
 </style>
 

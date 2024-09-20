@@ -65,3 +65,8 @@ gem "paranoia"
 gem 'stripe'
 gem "figaro"
 gem 'ckeditor'
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
+gem 'groupdate'
+gem 'chartjs-ror'
+gem "chartkick"
