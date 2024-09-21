@@ -17,7 +17,7 @@
     <% if cart_item.product.present? %>
     <tr>
       <td><%= cart_item&.product&.name %></td>
-      <td><%= cart_item&.product&.description %></td>
+      <td><%= truncate(strip_tags(cart_item&.product&.description), length: 40) %></td>
       <td><% if cart_item&.product&.pictures.present? %>
         <%= image_tag url_for(cart_item&.product&.pictures.last), hight:150,width:150 %>
         <% end %>

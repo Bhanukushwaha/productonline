@@ -14,7 +14,7 @@
 			<tr>
 		  	  <td><%= sindex+1 %></td>
 					<td><%= product.name %></td>
-					<td><%= product.description %></td>
+					<td><%= truncate(strip_tags(product.description), length: 40) %></td>
 					<td><%= product.price %></td>
 					<td><%= link_to 'Remove from favorites', remove_favorite_product_favorites_path(product.id, remove_by: "lists") %></td>
 					<td><%= link_to "Details", product %></td>

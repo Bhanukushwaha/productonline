@@ -27,7 +27,7 @@
 					
           <p class="product-description">
             <strong>Description :</strong>
-            <%= @product&.description&.html_safe %>
+            <%= strip_tags(@product&.description) %>
           </p>
           <h4 class="price">current price: <span>$<%= @product.price %></span></h4>
           <!-- <h4 class="price">current price: <span>$<%#= @product.price.pr? ? @product.try(:discount_price).to_f : '0.0'%></span></h4>           -->
